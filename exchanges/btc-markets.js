@@ -137,6 +137,14 @@ Trader.prototype.checkOrder = function(order, callback) {
   this.btcmakets.getOpenOrders(this.asset, this.currency, 10, null, check);
 }
 
+Trader.prototype.getOrder = function(order, callback) {
+  var get = function(err, result) {
+    if(err || !result)
+      log.error('unable to get order', order, '(', err, result, ')');
+  }.bind(this);
+  this.btcmakets.getOrderDetail([order], callback);
+}
+
 Trader.prototype.cancelOrder = function(order, callback) {
   var cancel = function(err, result) {
     if(err || !result)
